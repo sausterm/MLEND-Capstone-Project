@@ -10,12 +10,7 @@ import datetime as dt
 import os
 from matplotlib import style
 from collections import Counter
-from sklearn import svm, cross_validation, neighbors
-from sklearn.ensemble import VotingClassifier, RandomForestClassifier
-
-
 import fix_yahoo_finance as yf
-
 
 style.use('ggplot')
 
@@ -58,6 +53,7 @@ for index, ticker in enumerate(tickers):
     if ticker == 'BF.B':
         tickers.pop(index)
 print(tickers)
+
 def get_yahoo_data(reload_sp500=False):
 
     #if reload_sp500:

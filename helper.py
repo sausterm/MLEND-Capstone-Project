@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import bs4 as bs
 import pickle
 import requests
+from datetime import timedelta
 from sklearn.metrics import accuracy_score
 
 
@@ -86,12 +87,12 @@ def encode_request(instance, num_samples, quantiles):
 
 def get_stock_prediction(ticker,date, df,predictor,dynamic_feat,cat):
     date_pred = pd.Timestamp(date, freq='D')
-    date_start = date_pred-50
+    date_start = date_pred-timedelta(days=94)
     pred_df = df.loc[(slice(str(date_start),str(date_pred)), ticker), :]
     result_df = pred_df.loc[(slice(str(date_pred),str(date_pred)), ticker), :]
     pred = {
         "start": str(date_pred),
-        "target": pred_df['target'][date_start:date_pred-1].tolist(),
+        "target": pred_df['target'][date_start:date_pred-timedelta(days=1)].tolist(),
         "cat": cat,
         "dynamic_feat": pred_df[dynamic_feat][date_start:date_pred].values.T.tolist()
     }

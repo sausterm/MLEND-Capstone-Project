@@ -39,9 +39,9 @@ def get_sp500_tickers():
     return tickers
 
 def get_target_distribution(df):
-    print("-1: ", df[df['target']==-1].size)
-    print(" 0: ", df[df['target']==0].size)
-    print(" 1: ", df[df['target']==1].size)
+    print("-1: ", len(df[df['target']==-1]))
+    print(" 0: ", len(df[df['target']==0]))
+    print(" 1: ", len(df[df['target']==1]))
     
 
 def write_json_dataset(filename, data): 
@@ -120,4 +120,4 @@ def get_prediction_accuracy(ticker, date_index,df,predictor,dynamic_feat, cat):
     data = {'target': list(target), 'prediction': list(prediction)}
     prediction_df = pd.DataFrame(data=data,index=date_index, columns=['target','prediction'])
     
-    return accuracy_score(target, prediction), prediction_df
+    return accuracy_score(target, prediction)

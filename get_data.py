@@ -65,22 +65,22 @@ def get_yahoo_data(reload_sp500=False):
     if not os.path.exists('stocks_dfs'):
         os.makedirs('stocks_dfs')
 
-    start = dt.datetime(2010,1,1)
-    end = dt.datetime(2020,1,1)
+    start = dt.datetime(2020,1,1)
+    end = dt.datetime(2020,6,1)
 
     for ticker in tickers:
         print(ticker)
-        if not os.path.exists('stocks_dfs/{}.csv'.format(ticker)):
+        if not os.path.exists('test_stocks_dfs/{}.csv'.format(ticker)):
             try:
                 df = web.DataReader(str(ticker), 'yahoo', start, end)
-                df.to_csv('stocks_dfs/{}.csv'.format(ticker))
+                df.to_csv('test_tocks_dfs/{}.csv'.format(ticker))
             except:
                 print('couldnt load data.')
 
         else:
             print('Already have {}'.format(ticker))
 
-#get_yahoo_data()
+get_yahoo_data()
 
 def compile_data():
     with open("sp500tickers.pickle",'rb') as f:
